@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS User_Address(
+    ID INT NOT NULL UNIQUE AUTO_INCREMENT,
+    DesaID INT,
+    KecamatanID INT,
+    Street VARCHAR (255),
+    UserID INT,
+    FOREIGN KEY (DesaID) REFERENCES Address_Desa(ID),
+    FOREIGN KEY (KecamatanID) REFERENCES Address_Kecamatan(ID),
+    FOREIGN KEY (UserID) REFERENCES User(ID),
+    PRIMARY KEY (ID)
+)

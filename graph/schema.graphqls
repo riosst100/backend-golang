@@ -1,0 +1,84 @@
+type User {
+  id: ID!
+  name: String!
+  phone: String!
+  password: String!
+  photo: String!
+  address: Address!
+}
+
+type Address {
+  id: ID!
+  desa: Desa!
+  kecamatan: Kecamatan!
+  street: String!
+}
+
+type Desa {
+  id: ID!
+  name: String!
+  kecamatan: Kecamatan!
+}
+
+type Kecamatan {
+  id: ID!
+  name: String!
+}
+
+input NewUser {
+  name: String!
+  phone: String!
+  password: String!
+  address: NewAddress!
+}
+
+input NewAddress {
+  desa_id: String!
+  kecamatan_id: String!
+  street: String!
+}
+
+input LoginUser {
+  phone: String!
+  password: String!
+}
+
+type Order {
+  id: ID!
+  user: User!
+}
+
+type Business {
+  id: ID!
+  name: String!
+  photo: String!
+  address: Address!
+  user: User!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  price: String!
+  photo: String!
+  business: Business!
+}
+
+type Mutation {
+  register(input: NewUser!): String!
+  login(input: LoginUser!): String!
+}
+
+type Query {
+  userList: [User]!
+  businessList: [Business]!
+  productList: [Product]!
+  userByID(id: ID!): User!
+  businessByID(id: ID!): Business!
+  productByID(id: ID!): Product!
+  orderByID(id: ID!): Order!
+  businessByUserID(user_id: ID!): [Business]!
+  productByBusinessID(business_id: ID!): [Product]!
+  desaByKecamatanID(kecamatan_id: ID!): [Desa]!
+  kecamatanList: [Kecamatan]!
+}
